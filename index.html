@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8"/>
+    <title>Chart.js demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class='wrapper'>
+    	<div class='canvas-holder' style='witdh 40%'>
+			<canvas id="myPieGraph" width="400" height="400"></canvas>
+		</div>
+
+    </div>
+	
+	
+<script>
+
+var img = new Image();
+img.src = 'https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5e13608bf6071802b8df2c54c5205213&w=1000&q=80';
+var img_2= new Image();
+img_2.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Red_flag.svg/1280px-Red_flag.svg.png'
+img.onload = function() {
+    
+    var ctx = document.getElementById("myPieGraph").getContext("2d");
+    var fillPattern = ctx.createPattern(img, 'repeat');
+	var patternHover = ctx.createPattern(img_2,'repeat');
+    
+    var myPieGraph = new Chart(ctx,{
+        type: 'pie',
+        data : {
+            	labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                    fillPattern,
+                    fillPattern,
+                    fillPattern,
+                    fillPattern,
+                    fillPattern,
+                    fillPattern,
+                ],
+                    borderWidth: 0,
+					//"Highlighted picture on hovering"
+					hoverBackgroundColor: patternHover
+
+                }],
+        
+            
+                 },
+        options: {
+				onClick: function() {
+					console.log ('legend onClick');
+				},
+				//Remove tags of each pie graph section
+				legend: {
+					
+        			display: false
+    			},
+				//Remove tooltips
+				tooltips: {
+        			enabled: false
+    			},
+			
+				animation: {
+					animateScale: true,
+					animateRotate: false
+				},
+
+        }
+     });
+    
+ };
+    
+
+
+</script>
+    </body>
+
+</html>
